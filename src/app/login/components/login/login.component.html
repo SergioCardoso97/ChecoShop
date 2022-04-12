@@ -3,17 +3,23 @@
     <mat-card-header>
       <mat-card-title>Log in <mat-icon style="padding-left: 10%;">login</mat-icon></mat-card-title><br>
     </mat-card-header>
-    <form class="example-form">
+    <form [formGroup]="form" class="example-form" (ngSubmit)="access($event)">
       <mat-card-content>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Username">
+          <input matInput formControlName="username" placeholder="Username" type="text">
         </mat-form-field>
+        <div *ngIf="form.get('username').errors && form.get('username').dirty">
+          <p *ngIf="form.get('username').hasError('required')">El campo es requerido</p>
+        </div>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Password">
+          <input matInput formControlName="password" placeholder="Password" type="password">
         </mat-form-field>
+        <div *ngIf="form.get('password').errors && form.get('password').dirty">
+          <p *ngIf="form.get('password').hasError('required')">El campo es requerido</p>
+        </div>
       </mat-card-content>
-      <button mat-stroked-button color="primary" class="btn-block">Log in</button> <br> <br>
+      <button type="submit" [disabled]="form.invalid" mat-stroked-button color="primary" class="btn-block">Log in</button> <br> <br>
     </form>
-    <button routerLink="/login/new-user" mat-raised-button color="" class="btn-block">Registrarse</button>
+    <button (click)="newUser($event)" mat-raised-button color="" class="btn-block">Registrarse</button>
   </mat-card>
 </div>

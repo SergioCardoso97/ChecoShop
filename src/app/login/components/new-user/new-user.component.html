@@ -3,19 +3,28 @@
       <mat-card-header>
             <mat-card-title>New User<mat-icon style="padding-left: 10%;">account_circle</mat-icon></mat-card-title><br>
       </mat-card-header>
-      <form class="example-form">
+      <form [formGroup]="form" class="example-form" (ngSubmit)="access($event)">
         <mat-card-content>
             <mat-form-field class="example-full-width">
-                <input matInput placeholder="Email">
+                <input matInput formControlName="email" placeholder="Email" type="email">
             </mat-form-field>
+            <div *ngIf="form.get('email').errors && form.get('email').dirty">
+              <p *ngIf="form.get('email').hasError('required')">El campo es requerido</p>
+            </div>
             <mat-form-field class="example-full-width">
-                <input matInput placeholder="Username">
+                <input matInput formControlName="username" placeholder="Username" type="text">
             </mat-form-field>
+            <div *ngIf="form.get('username').errors && form.get('username').dirty">
+              <p *ngIf="form.get('username').hasError('required')">El campo es requerido</p>
+            </div>
             <mat-form-field class="example-full-width">
-                <input matInput placeholder="Password">
+                <input matInput formControlName="password" placeholder="Password" type="password">
             </mat-form-field>
+            <div *ngIf="form.get('password').errors && form.get('password').dirty">
+              <p *ngIf="form.get('password').hasError('required')">El campo es requerido</p>
+            </div>
         </mat-card-content>
-        <button routerLink="/home" mat-stroked-button color="primary" class="btn-block">Create</button> <br> <br>
+        <button type="submit" [disabled]="form.invalid" mat-stroked-button color="primary" class="btn-block">Create</button> <br> <br>
       </form>
     </mat-card>
   </div>
