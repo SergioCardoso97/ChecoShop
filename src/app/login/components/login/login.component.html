@@ -6,10 +6,10 @@
     <form [formGroup]="form" class="example-form" (ngSubmit)="access($event)">
       <mat-card-content>
         <mat-form-field class="example-full-width">
-          <input matInput formControlName="username" placeholder="Username" type="text">
+          <input matInput formControlName="email" placeholder="Email" type="text">
         </mat-form-field>
-        <div *ngIf="form.get('username').errors && form.get('username').dirty">
-          <p *ngIf="form.get('username').hasError('required')">El campo es requerido</p>
+        <div *ngIf="form.get('email').errors && form.get('email').dirty">
+          <p *ngIf="form.get('email').hasError('required')">El campo es requerido</p>
         </div>
         <mat-form-field class="example-full-width">
           <input matInput formControlName="password" placeholder="Password" type="password">

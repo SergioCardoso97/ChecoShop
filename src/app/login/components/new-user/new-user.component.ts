@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-new-user',
@@ -13,7 +14,8 @@ export class NewUserComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {
     this.buildForm();
    }
@@ -32,7 +34,11 @@ export class NewUserComponent implements OnInit {
   access(event: Event){
     event.preventDefault();
     if(this.form.valid){
-      this.router.navigate(['/home']);
+      const value = this.form.value;
+      this.authService.createUser(value.email, value.password)
+      .then(() => {
+        this.router.navigate(['/login']);
+      });
     }
   }
 
